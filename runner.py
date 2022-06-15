@@ -50,8 +50,7 @@ def main():
         #print(parsedInput[0][1])
         # words = ["reese","like","boobs","apple","abelp", "eager"]
         # words2 = ["reese","like","boobs","apple","abelp","eager"]
-        print("grey letters: ")
-        print(greyLetters)
+
         #remove words with grey letter
         need_to_remove = []
         for word in words:
@@ -62,9 +61,6 @@ def main():
                     #words2.remove(word)
                     need_to_remove.append(word)
                     break
-
-        print("need to remove 1:")
-        print(need_to_remove)
 
         words = [word for word in words if word not in need_to_remove]
         
@@ -78,8 +74,7 @@ def main():
                 if yellowLetters[i] != '!':
                     if word[i] == yellowLetters[i]:
                         need_to_remove2.append(word)
-        print("need to remove 2:")
-        print(need_to_remove2)
+                        
         words = [word for word in words if word not in need_to_remove2]
         
         need_to_remove3 = []
