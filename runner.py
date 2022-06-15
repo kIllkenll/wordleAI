@@ -9,23 +9,49 @@ def main():
 
     greenLetters = ["!"]*5
     yellowLetters = ["!"]*5
-    greyLetters = list()
     
+   
 
     while(True):
         
         print("Enter word")
         inputWord = input()
+
+        if inputWord == ".":
+            print("Closing Program")
+            return
         print("Enter values of each letter 2 for green, 1 for yellow, 0 for grey")
         inputValue = input()
+        
+       
+
+
+        greyLetters = list()
+        
+        onlyDuplicates = list()
+
+        for i in range(5):
+            if int(inputValue[i]) == 2:
+                greenLetters[i] = inputWord[i]
+        
+        for i in range(5):
+            if int(inputValue[i]) == 1:
+                yellowLetters[i] = inputWord[i]
 
         for i in range(5):
             if int(inputValue[i]) == 0:
-                greyLetters.append(inputWord[i])
+                if inputWord[i] in yellowLetters or inputWord[i] in greenLetters:
+                    onlyDuplicates.append(inputWord[i])
+                else:
+                    greyLetters.append(inputWord[i])
+
+
+        
         #print(parsedInput[0][1])
         # words = ["reese","like","boobs","apple","abelp", "eager"]
         # words2 = ["reese","like","boobs","apple","abelp","eager"]
-
+        print("grey letters: ")
+        print(greyLetters)
         #remove words with grey letter
         need_to_remove = []
         for word in words:
@@ -36,19 +62,14 @@ def main():
                     #words2.remove(word)
                     need_to_remove.append(word)
                     break
-        #print(need_to_remove)
+
+        print("need to remove 1:")
+        print(need_to_remove)
 
         words = [word for word in words if word not in need_to_remove]
         
-
-        for i in range(5):
-            if int(inputValue[i]) == 2:
-                greenLetters[i] = inputWord[i]
+    
         
-        if len(yellowLetters) != 0:
-            for i in range(5):
-                if int(inputValue[i]) == 1:
-                    yellowLetters[i] = inputWord[i]
 
         need_to_remove2 = []
         #remove words with letters in the exact position of yellow
@@ -57,7 +78,8 @@ def main():
                 if yellowLetters[i] != '!':
                     if word[i] == yellowLetters[i]:
                         need_to_remove2.append(word)
-
+        print("need to remove 2:")
+        print(need_to_remove2)
         words = [word for word in words if word not in need_to_remove2]
         
         need_to_remove3 = []
@@ -70,8 +92,17 @@ def main():
 
         words = [word for word in words if word not in need_to_remove3]
 
-        #sum of arise
+        need_to_remove4 = []
+
+        for word in words:
+            for letter in onlyDuplicates:
+                num = calculateDuplicate(word, letter)
+                if num > 2:
+                    need_to_remove4.append(word)
+
+        words = [word for word in words if word not in need_to_remove4]
         
+
         # possibleAnswer = inputWord
         # answerValue = calculateValue(inputWord, greenLetters, yellowLetters)
         possibleAnswer = ""
@@ -102,7 +133,7 @@ def main():
                 #    print(possibleAnswer)
                 #    answerValue = calculateValue(possibleAnswer, greenLetters, yellowLetters)
                    
-        print(words)
+        #print(words)
 
         # if(possibleAnswer == ""):
         #    words = get_wordle_guesses()
@@ -112,7 +143,12 @@ def main():
 
 
 
-
+def calculateDuplicate(word, find):
+    count = 0
+    for letter in word:
+        if letter == find:
+            count+=1
+    return count
     
 def eliminateLower(words, value, green, yellow):
     toEliminate = []
