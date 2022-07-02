@@ -4,9 +4,6 @@ import random
 
 def main():
     words = get_wordle_guesses()
-
-    #words = ["brick","drift","primo","arise"]
-
     greenLetters = ["!"]*5
     yellowLetters = ["!"]*5
     
@@ -46,19 +43,13 @@ def main():
                     greyLetters.append(inputWord[i])
 
 
-        
-        #print(parsedInput[0][1])
-        # words = ["reese","like","boobs","apple","abelp", "eager"]
-        # words2 = ["reese","like","boobs","apple","abelp","eager"]
-
         #remove words with grey letter
         need_to_remove = []
         for word in words:
             for letter in greyLetters:
-                #print(word + ' '+ letter)
+               
                 if letter in word:
-                    #print(word + ' '+ letter)
-                    #words2.remove(word)
+                    
                     need_to_remove.append(word)
                     break
 
@@ -98,8 +89,6 @@ def main():
         words = [word for word in words if word not in need_to_remove4]
         
 
-        # possibleAnswer = inputWord
-        # answerValue = calculateValue(inputWord, greenLetters, yellowLetters)
         possibleAnswer = ""
         answerValue = 0
         #get words by letter and position
@@ -122,18 +111,7 @@ def main():
                     answerValue = sum
                     possibleAnswer = word
                     eliminateLower(words, answerValue,greenLetters, yellowLetters)
-                # elif answerValue == sum:
-                #    eliminateLower(words, answerValue,greenLetters, yellowLetters)
-                #    possibleAnswer = random.choice(words)
-                #    print(possibleAnswer)
-                #    answerValue = calculateValue(possibleAnswer, greenLetters, yellowLetters)
-                   
-        #print(words)
-
-        # if(possibleAnswer == ""):
-        #    words = get_wordle_guesses()
-        #    possibleAnswer = random.choice(words)
-        #    answerValue = calculateValue(possibleAnswer, greenLetters, yellowLetters)
+               
         print("Possible Answer is: "+ possibleAnswer)           
 
 
